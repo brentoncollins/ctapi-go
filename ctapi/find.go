@@ -60,7 +60,7 @@ func (this *CtApi) FindAll(h windows.Handle, table string) <-chan windows.Handle
 				ch <- hObj
 				hObj, err = this.CtFindNext(hSearch)
 				if err != nil {
-					fmt.Errorf("error geting next", err)
+					fmt.Errorf("error getting next: %v", err)
 				}
 			}
 		}

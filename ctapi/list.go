@@ -35,6 +35,16 @@ func (this *CtList) Free() error {
 	return nil
 }
 
+// Delete Frees a tag created with Add (ctListAdd).  Returns true on success,
+// If the function does not succeed, the return value is false.
+func (this *CtList) Delete(hTag windows.Handle) (bool, error) {
+	r1, _, err := this.api.procs.ctListDelete.Call(uintptr(hTag))
+	if r1 == 0 {
+		return false, err
+	}
+	return true, nil
+}
+
 // Add adds a tag to the list of tags being observed.  Returns
 // a handle that can be used to read the item or remove it from
 // the list.  Also returns an error code that is nil if there

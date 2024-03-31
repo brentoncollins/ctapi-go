@@ -19,3 +19,22 @@ func (this *CtApi) CtOpen() (windows.Handle, error) {
 
 	return windows.Handle(r1), nil
 }
+
+func (this *CtApi) CtOpenRemote(sComputer string, sUser string, sPassword string, nMode int) (windows.Handle, error) {
+
+	r1, _, err := this.procs.ctOpen.Call(
+		StringToLPCTSTR(sComputer),
+		StringToLPCTSTR(sUser),
+		StringToLPCTSTR(sPassword),
+		uintptr(nMode))
+
+	if r1 != 0 {
+		return windows.Handle(r1), nil
+	}
+
+	if err != nil {
+		return 0, err
+	}
+
+	return windows.Handle(r1), nil
+}
